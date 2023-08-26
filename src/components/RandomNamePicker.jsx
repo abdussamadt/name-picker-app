@@ -1,11 +1,12 @@
-import { useState, useRef } from "react";
+import { useState, } from "react";
 
 const RandomNamePicker = () => {
+  // all states
   const [randomName, setRandomName] = useState("");
   const [inputNames, setInputNames] = useState([]);
   const [inputText, setInputText] = useState("");
-  const inputRef = useRef();
 
+  // setRandomName function
   const pickRandomName = () => {
     if (inputNames.length === 0) {
       setRandomName("No names available");
@@ -15,20 +16,22 @@ const RandomNamePicker = () => {
     setRandomName(inputNames[randomIndex]);
   };
 
+  //setInputText function
   const handleInputChange = (event) => {
     const { value } = event.target;
     setInputText(value);
   };
 
+  // setInputNames function
   const handleAddNames = () => {
     setInputNames((prevInputNames) => [
       ...prevInputNames,
       ...inputText.split("\n"),
     ]);
-    setInputText(""); // Clear the textarea
-    inputRef.current.value = ""; // Clear the textarea visually
+    setInputText("");
   };
 
+  // clear setInputNames & setRandomName fields
   const handleClearNames = () => {
     setInputNames([]);
     setRandomName("");
@@ -49,7 +52,7 @@ const RandomNamePicker = () => {
               Add Names:
             </label>
             <textarea
-              ref={inputRef}
+              // ref={inputRef}
               rows="10"
               placeholder="Enter all names, each name should be in new line..."
               value={inputText}
